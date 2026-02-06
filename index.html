@@ -2,310 +2,309 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday 🎉</title>
+<title>Happy Birthday 🎂</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 * { box-sizing: border-box; }
 
 body {
-    margin: 0;
-    height: 100vh;
-    background: radial-gradient(circle at bottom, #1a0033, #000);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    font-family: Arial, sans-serif;
-    color: #fff;
+  margin: 0;
+  height: 100vh;
+  background:
+    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+    url("bg.jpg") center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  color: #fff;
 }
 
-/* stars */
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background:
-        radial-gradient(1px 1px at 10% 20%, white, transparent),
-        radial-gradient(1px 1px at 80% 30%, white, transparent),
-        radial-gradient(1px 1px at 50% 70%, white, transparent),
-        radial-gradient(1px 1px at 30% 80%, white, transparent),
-        radial-gradient(1px 1px at 70% 15%, white, transparent);
-    animation: twinkle 4s infinite alternate;
+/* Gift */
+#giftStage { text-align: center; z-index: 5; }
+.gift { font-size: 90px; cursor: pointer; animation: bounce 1.5s infinite; }
+@keyframes bounce { 50% { transform: translateY(-12px); } }
+
+/* Stage */
+#stage {
+  display: none;
+  text-align: center;
+  z-index: 5;
+  background: rgba(0,0,0,0.4);
+  padding: 25px 30px;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
 }
 
-@keyframes twinkle {
-    from { opacity: .5; }
-    to { opacity: 1; }
+/* Title */
+#title {
+  font-size: 28px;
+  margin-bottom: 12px;
+  color: #ffb3c6;
 }
 
-/* moon */
-.moon {
-    position: fixed;
-    top: 30px;
-    right: 40px;
-    width: 70px;
-    height: 70px;
-    background: #fff;
-    border-radius: 50%;
-    box-shadow: 0 0 30px rgba(255,255,255,.6);
-}
-
-/* gift */
-#giftStage {
-    text-align: center;
-    z-index: 10;
-}
-
-.gift {
-    font-size: 96px;
-    cursor: pointer;
-    animation: bounce 1.4s infinite;
-}
-
-@keyframes bounce {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-14px); }
-}
-
-/* love stage */
-#loveStage {
-    display: none;
-    text-align: center;
-    z-index: 10;
-    animation: fadeIn 1.2s forwards;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(15px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-h1 {
-    color: #ffd1dc;
-    margin-bottom: 10px;
-}
-
+/* Countdown */
 #countdown {
-    font-size: 20px;
-    margin-bottom: 12px;
-    color: #ffe4ec;
+  font-size: 48px;
+  color: #ffd1dc;
+  margin-bottom: 15px;
 }
 
+/* Lyrics */
 #lyrics {
-    min-height: 200px;
-    line-height: 1.6;
+  min-height: 160px;
+  font-size: 20px;
+  line-height: 1.6;
 }
 
-/* button */
-button {
-    margin-top: 15px;
-    padding: 10px 26px;
-    border: none;
-    border-radius: 25px;
-    background: #ff6f91;
-    color: #fff;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-/* floating emojis */
+/* Rising emojis */
 .float {
-    position: fixed;
-    bottom: -100px;
-    animation: rise linear forwards;
-    z-index: 1;
+  position: fixed;
+  bottom: -60px;
+  animation: rise linear forwards;
+  z-index: 1;
 }
 
 @keyframes rise {
-    from { transform: translateY(0); opacity: 1; }
-    to { transform: translateY(-120vh); opacity: 0; }
-}
-
-/* popup */
-.popup {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  to {
+    transform: translateY(-120vh);
     opacity: 0;
-    pointer-events: none;
-    transition: .5s;
-    z-index: 30;
+  }
 }
 
-.popup.show { opacity: 1; }
-
-.popup-content {
-    background: #111;
-    padding: 30px 40px;
-    border-radius: 20px;
-    font-size: 26px;
-    color: #ffd1dc;
-    box-shadow: 0 0 30px rgba(255,182,193,.6);
+/* Cake */
+#cakeBox {
+  display: none;
+  margin-top: 20px;
 }
 
-/* cake */
 #cake {
-    position: fixed;
-    bottom: 30px;
-    font-size: 90px;
-    cursor: pointer;
-    z-index: 40;
+  font-size: 90px;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
 }
 
 #flame {
-    position: absolute;
-    top: -35px;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: flicker .4s infinite alternate;
+  position: absolute;
+  top: -30px;       /* ABOVE the candle */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 26px;  /* SMALL flame */
+  animation: flicker .4s infinite alternate;
 }
 
 @keyframes flicker {
-    from { transform: translateX(-50%) scale(1); }
-    to { transform: translateX(-50%) scale(1.2); }
+  to { transform: scale(1.2); }
+}
+
+#tapText {
+  margin-top: 8px;
+  font-size: 16px;
+  color: #ffd1dc;
+}
+
+/* Popup */
+.popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: .4s;
+  z-index: 10;
+}
+
+.popup.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.popup-box {
+  background: #111;
+  padding: 30px 40px;
+  border-radius: 20px;
+  font-size: 24px;
+  color: #ffd1dc;
+}
+
+/* Controls */
+#controls {
+  margin-top: 20px;
+  display: none;
+}
+
+button {
+  padding: 10px 26px;
+  border: none;
+  border-radius: 25px;
+  background: #ff6f91;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
 }
 </style>
 </head>
 
 <body>
 
-<div class="moon"></div>
-
 <!-- Gift -->
 <div id="giftStage">
-    <div class="gift" id="gift">🎁</div>
-    <p>Open your gift, DEAR 💝</p>
+  <div class="gift" id="gift">🎁</div>
+  <p>Open your gift, DEAR 💝</p>
 </div>
 
-<!-- Birthday Stage -->
-<div id="loveStage">
-    <h1>🎂 Happy Birthday</h1>
-    <div id="countdown"></div>
-    <div id="lyrics"></div>
+<!-- Main Stage -->
+<div id="stage">
+  <h2 id="title">Special Birthday Wish 💝</h2>
+  <div id="countdown"></div>
+  <div id="lyrics"></div>
 
-    <button id="toggleBtn">
-        <span id="playIcon">▶️ Play</span>
-        <span id="pauseIcon" style="display:none;">⏸ Pause</span>
-    </button>
+  <!-- Cake -->
+  <div id="cakeBox">
+    <div id="cake">
+      🎂
+      <div id="flame">🔥</div>
+    </div>
+    <div id="tapText">Tap the candle 🎂</div>
+  </div>
+
+  <!-- Controls -->
+  <div id="controls">
+    <button id="toggleBtn">⏸ Pause</button>
+  </div>
 </div>
 
 <!-- Popup -->
 <div class="popup" id="popup">
-    <div class="popup-content">Wishing You a Beautiful Birthday 🎉✨</div>
-</div>
-
-<!-- Cake -->
-<div id="cake">
-    🎂
-    <div id="flame">🔥</div>
+  <div class="popup-box">🎉 Happy Birthday! 🎉</div>
 </div>
 
 <audio id="bgm" loop>
-    <source src="music.mp3" type="audio/mpeg">
+  <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-/* 🎂 Birthday date (EDIT THIS) */
-const birthday = new Date(2026, 1, 14);
-
 const lyrics = [
   "Today is all about you 🎉",
-  "May your smile shine brighter 🌟",
-  "Another year, another beautiful chapter 📖",
-  "May happiness follow you everywhere 🌸",
-  "And may joy never leave your side 🤍",
-  "Happy Birthday 🎂✨"
+  "Another year of beautiful memories ✨",
+  "May happiness always surround you 🌸",
+  "May your dreams keep growing 💫",
+  "Happy Birthday 🎂🤍"
 ];
 
-let line = 0, paused = false;
-const box = document.getElementById("lyrics");
-const bgm = document.getElementById("bgm");
-const playIcon = document.getElementById("playIcon");
-const pauseIcon = document.getElementById("pauseIcon");
-const popup = document.getElementById("popup");
-
-/* gift open */
-document.getElementById("gift").onclick = () => {
-    document.getElementById("giftStage").style.display = "none";
-    document.getElementById("loveStage").style.display = "block";
-    bgm.volume = 0.4;
-    bgm.play();
-    playIcon.style.display = "none";
-    pauseIcon.style.display = "inline";
-    typeLyrics();
-    startCelebration();
-};
-
-/* lyrics */
-function typeLyrics() {
-    if (paused || line >= lyrics.length) return;
-    box.innerHTML += lyrics[line++] + "<br>";
-    if (line === lyrics.length) setTimeout(showPopup, 1200);
-    setTimeout(typeLyrics, 1500);
-}
-
-/* play pause */
-document.getElementById("toggleBtn").onclick = () => {
-    paused = !paused;
-    paused ? bgm.pause() : bgm.play();
-    playIcon.style.display = paused ? "inline" : "none";
-    pauseIcon.style.display = paused ? "none" : "inline";
-};
-
-/* popup */
-function showPopup() {
-    popup.classList.add("show");
-    setTimeout(() => popup.classList.remove("show"), 4000);
-}
-
-/* countdown */
+const gift = document.getElementById("gift");
+const stage = document.getElementById("stage");
 const cd = document.getElementById("countdown");
-setInterval(() => {
-    const now = new Date();
-    const diff = birthday - now;
-    if (diff <= 0) {
-        cd.innerHTML = "🎉 It's Your Birthday! 🎂";
-        return;
-    }
-    const d = Math.floor(diff / 86400000);
-    const h = Math.floor(diff / 3600000) % 24;
-    const m = Math.floor(diff / 60000) % 60;
-    const s = Math.floor(diff / 1000) % 60;
-    cd.innerHTML = `🎈 Birthday in ${d}d ${h}h ${m}m ${s}s`;
-}, 1000);
+const box = document.getElementById("lyrics");
+const cakeBox = document.getElementById("cakeBox");
+const flame = document.getElementById("flame");
+const popup = document.getElementById("popup");
+const bgm = document.getElementById("bgm");
+const controls = document.getElementById("controls");
+const toggleBtn = document.getElementById("toggleBtn");
 
-/* balloons + emojis */
-function startCelebration() {
-    const items = ["🎈","🎈","🎈","🎉","✨","🎂","🎁"];
-    setInterval(() => {
-        const el = document.createElement("div");
-        el.className = "float";
-        el.innerHTML = items[Math.floor(Math.random()*items.length)];
-        el.style.left = Math.random()*100 + "vw";
-        el.style.fontSize = (50 + Math.random()*40) + "px";
-        el.style.animationDuration = (6 + Math.random()*4) + "s";
-        document.body.appendChild(el);
-        setTimeout(()=>el.remove(),10000);
-    }, 350);
+let line = 0;
+let charIndex = 0;
+let paused = false;
+let typingInterval;
+let floatInterval;
+let candleBlown = false;
+
+/* Gift click */
+gift.onclick = () => {
+  document.getElementById("giftStage").style.display = "none";
+  stage.style.display = "block";
+  startCountdown(5);
+};
+
+/* Countdown */
+function startCountdown(sec) {
+  cd.innerText = sec;
+  const timer = setInterval(() => {
+    sec--;
+    cd.innerText = sec;
+    if (sec === 0) {
+      clearInterval(timer);
+      cd.innerText = "";
+      bgm.volume = 0.4;
+      bgm.play();
+      startFloating();
+      typeWriter();
+    }
+  }, 1000);
 }
 
-/* cake click */
-document.getElementById("cake").onclick = () => {
-    document.getElementById("flame").innerHTML = "💨";
-    for (let i = 0; i < 80; i++) {
-        const c = document.createElement("div");
-        c.className = "float";
-        c.innerHTML = ["🎉","✨","🎂","🎁"][Math.floor(Math.random()*4)];
-        c.style.left = Math.random()*100 + "vw";
-        c.style.fontSize = "24px";
-        c.style.animationDuration = "4s";
-        document.body.appendChild(c);
-        setTimeout(()=>c.remove(),4000);
+/* Rising animation */
+function startFloating() {
+  const emojis = ["🎈","🎉","🎊","✨","🎂","🎁"];
+  floatInterval = setInterval(() => {
+    if (paused) return;
+
+    const e = document.createElement("div");
+    e.className = "float";
+    e.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+    e.style.left = Math.random()*100 + "vw";
+    e.style.fontSize = (35 + Math.random()*35) + "px";
+    e.style.animationDuration = (4 + Math.random()*4) + "s";
+    document.body.appendChild(e);
+
+    setTimeout(()=>e.remove(),9000);
+  }, 350);
+}
+
+/* Typewriter */
+function typeWriter() {
+  if (line >= lyrics.length) {
+    cakeBox.style.display = "block";
+    return;
+  }
+
+  typingInterval = setInterval(() => {
+    if (paused) return;
+
+    box.innerHTML += lyrics[line][charIndex++];
+    if (charIndex === lyrics[line].length) {
+      clearInterval(typingInterval);
+      box.innerHTML += "<br>";
+      line++;
+      charIndex = 0;
+      setTimeout(typeWriter, 800);
     }
+  }, 60);
+}
+
+/* Candle click */
+document.getElementById("cake").onclick = () => {
+  if (candleBlown) return;
+  candleBlown = true;
+
+  flame.innerText = "💨";
+  popup.classList.add("show");
+
+  setTimeout(() => {
+    popup.classList.remove("show");
+    cakeBox.style.display = "none";
+    document.getElementById("tapText").style.display = "none";
+    controls.style.display = "block";
+  }, 3000);
+};
+
+/* Play / Pause */
+toggleBtn.onclick = () => {
+  paused = !paused;
+  if (paused) {
+    bgm.pause();
+    toggleBtn.innerText = "▶️ Play";
+  } else {
+    bgm.play();
+    toggleBtn.innerText = "⏸ Pause";
+  }
 };
 </script>
 
